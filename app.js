@@ -6,7 +6,7 @@ var logger = require('morgan');
 var expressHbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var session = require('express-session');
-var passport = require('passport');
+//var passport = require('passport');
 var flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
@@ -18,8 +18,9 @@ mongoose.connect('mongodb://localhost:27017/movie', {useNewUrlParser:true, useUn
     .then(() => console.log('MongoDB Connected...'))
     .catch((err) => console.log(err));
 
+//改用原本的方法，不用passport
 // import passport.js I wrote
-require('./config/passport');
+//require('./config/passport');
 
 // view engine setup
 // default:app.set('views', path.join(__dirname, 'views'));
@@ -37,8 +38,8 @@ app.use(session({
 }));
 app.use(flash());
 // the configuration applied here will be available in the other file.(passport)
-app.use(passport.initialize());
-app.use(passport.session()); // should be after app.use(sesseion(...))
+//app.use(passport.initialize());
+//app.use(passport.session()); // should be after app.use(sesseion(...))
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

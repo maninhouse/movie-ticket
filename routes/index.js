@@ -3,7 +3,8 @@ var router = express.Router();
 var Movie = require('../models/movie');
 var moment = require('moment');
 var csrf = require('csurf');
-var passport = require('passport');
+//var passport = require('passport');
+var crypto = require('crypto');
 
 /*prevent from csrf
 csrf in wiki:https://zh.wikipedia.org/zh-tw/%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0*/
@@ -27,25 +28,31 @@ router.get('/', function(req, res, next) {
   });
 });
 
-
+/*
 router.get('/shop/buy', function(req, res, next){
   res.render('shop/buy');
 });
 router.get('/shop/detail', function(req, res, next){
   res.render('shop/detail');
 });
-
+*/
 
 
 router.get('/user/signup', function(req, res, next){
-  res.render('user/signup', {csrfToken: req.csrfToken()});
+  //what the fuxkkkkkkkkkkkkkkkkk
+  var salt = Math.floor(Math.random()*999);
+  Handlebars.registerHelper('encryptPwd', function(salt, pwd){
+    return crypto.createHash('sha1').update(pwd + salt);
+  });
+  res.render('user/signup', {csrfToken: req.csrfToken(), salt: salt});
 });
 
-router.post('/user/signup', passport.authenticate('local.signup', {
-  sucessRedirect: '/user/profile',
-  failureRedirect: '/user/signup',
-  failureFlash: true
-}));
+router.post('/user/signup', function(req, res, next){
+  var telephone = req.body.telephone;
+  var email = req.body.email;
+  var password = req.body.password;
+  var referralCode = refferalCode;
+});
 
 router.get('/user/profile', function(req, res, next){
   res.render('user/profile');

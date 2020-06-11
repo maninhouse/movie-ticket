@@ -7,7 +7,10 @@ var schema = new Schema({
     movieName: {type: String, required: true},
     releaseDate: {type: String, required: true},
     movieSynopsis: {type: String, required: true},
-    movieLength: {type: Number, required: true}
+    movieLength: {type: Number, required: true},
+    movieDirector: {type: String, required: true},
+    movieActor: {type: String, required: true},
+    ticketPrice: {type: Number, required: true}
 });
 
 module.exports = mongoose.model('Movie', schema);
