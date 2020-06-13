@@ -11,6 +11,8 @@ var schema = new Schema({
     movieDirector: {type: String, required: true},
     movieActor: {type: String, required: true},
     ticketPrice: {type: Number, required: true}
+}, {
+    collection: 'movies'
 });
 
 module.exports = mongoose.model('Movie', schema);

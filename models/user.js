@@ -6,7 +6,8 @@ var userSchema = new Schema({
     email: {type: String, required: true},
     password: {type: String, required: true},
     salt: {type: Number, required: true},
-    referralCode: {type: String, required: true}
+    referralCode: {type: String, required: true},
+    invitedFriend: {type: Number, required: true}
 });
 
 

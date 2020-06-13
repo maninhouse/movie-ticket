@@ -1,1 +1,8 @@
 <h1>user profile</h1>
+{{#if success}}
+    <p>{{success}}</p>
+    <p>{{user.telephone}}, 歡迎回來!</p>
+{{/if}}
+{{#if error}}
+    <p>{{error}}</p>
+{{/if}}
