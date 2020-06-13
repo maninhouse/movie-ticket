@@ -1,0 +1,50 @@
+{{#each tickets}}
+
+    <br>
+
+    <div class="card-container mx-auto">
+
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+
+                <!--
+                <div class="col-md-4 align-self-center">
+                    <img src='{{this.imagePath}}' class="img-fluid" alt="...">
+                </div>
+                -->
+                <div class="col-md-12">
+                    <div class="card-body">
+                    
+                        <h5 class="card-title">票券代碼：{{this._id}}</h5>
+
+                        <!--
+                        <p class="card-text">：{{this.releaseDate}}</p>
+                        <p class="card-text">電影簡介：{{this.movieSynopsis}}</p>
+                        <p class="card-text">片長：{{this.movieLength}}分鐘</p>
+                        -->
+                        
+                        <br>
+
+                        <div class="row justify-content-between">
+                            
+                            <div></div>
+
+                            <a href="/user/ticketInfo/{{ this._id }}" class="btn btn-secondary" role="button">查看</a>
+                            <a href="/user/ticketCode/{{ this._id }}" class="btn btn-secondary" role="button">兌換</a>
+
+                            <div></div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{{/each}}
+
+
+
+                        

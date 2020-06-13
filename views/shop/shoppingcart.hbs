@@ -1,0 +1,59 @@
+<div class="col-sm-12 col-md-12">
+    {{#if items}}
+    <div class="col align-self-center">
+        <div class="row justify-content-center">
+            <div class="col-sm-8 col-md-8">
+                <ul class="list-group">
+                    {{#each items}}
+                        <br>
+                        <li class="list-group-item">
+                            <div class="row justify-content-around">
+                            
+                            <strong>{{ this.item.movieName }}</strong>
+                            <div class="row">
+                                票數x <span class="label">{{ this.qty }}</span>
+                            </div>
+                            
+                            <span class="label label-success">${{ this.price }}</span>
+                                
+                                
+                            
+                            
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton">
+                                    操作
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="/reduce/{{this.item._id}}">-1</a>
+                                    <a class="dropdown-item" href="/remove/{{this.item._id}}">全部移除</a>
+                                </div>
+                            </div>
+                            </div>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-sm-8 col-md-8">
+                <strong>總計: {{ totalPrice }}</strong>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-sm-8 col-md-8">
+                <a href="/checkout/" type="button" class="btn btn-success">結帳</a>
+            </div>
+        </div>
+    </div>
+    {{else}}
+        <div class="row">
+            <div class="col-sm-8 col-md-8">
+                <h2>購物車是空的!</h2>
+            </div>
+        </div>
+    {{/if}}
+</div>

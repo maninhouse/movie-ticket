@@ -8,6 +8,7 @@ var userSchema = new Schema({
     salt: {type: Number, required: true},
     referralCode: {type: String, required: true},
     invitedFriend: {type: Number, required: true}
+    //orderId: {type: Array, required: true}
 });
 
 

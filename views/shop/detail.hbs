@@ -1,32 +1,32 @@
             
             
 
-                           
-            <div class="row no-gutters mx-auto">
+        
+            <div class="row no-gutters mx-auto justify-content-center">
 
                
-                <div class="col-md-4 align-self-center">
+                <div class="col-sm-6 col-md-6 col-lg-6 align-self-center">
                 
-                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.flickeringmyth.com%2Fwp-content%2Fuploads%2F2018%2F03%2FReady-Player-One-poster.jpg&f=1&nofb=1" class="img-fluid" alt="...">
+                <img src="{{movie.imagePath}}" class="img-fluid" alt="...">
                 
                 <div class="col-md-8">
                 <div class="card-body">
 
-                    <small class="text-muted">21</small>
-                    <h5 class="card-title">一級玩家</h5>
-                    <p class="card-text">上映日期：2018/04/20</p>
-                    <p class="card-text">電影介紹：詳細介紹01</p>
-                    <p class="card-text">片長：140分鐘</p>
-                    <p class="card-text">導演：導演01</p>
-                    <p class="card-text">主演：主演01</p>
-                    <p class="card-text">票價：220</p>
-                    <form action="/" method="GET">
-                    <button type="submit" class="btn btn-secondary">瀏覽電影清單</button>
-                    </form>
-                                    </div>
+                    <h5 class="card-title">{{movie.movieName}}</h5>
+                    <p class="card-text">上映日期：{{movie.releaseDate}}</p>
+                    <p class="card-text">電影介紹：{{movie.movieSynopsis}}</p>
+                    <p class="card-text">片長：{{movie.movieLength}}分鐘</p>
+                    <p class="card-text">導演：{{movie.movieDirector}}</p>
+                    <p class="card-text">主演：{{movie.movieActor}}</p>
+                    <p class="card-text">票價：{{movie.ticketPrice}}</p>
+                    
+                    <a href="/" type="button" class="btn btn-secondary">瀏覽電影清單</a>
+                    
+                </div>
                 </div>
                
-                                    </div>
-       
+                </div>
+       </div>       
+         
 
   

@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 //var passport = require('passport');
 var flash = require('connect-flash');
+var MongoStore = require('connect-mongo')(session);
 
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
@@ -40,13 +41,21 @@ app.use(cookieParser());
 app.use(session({
     secret: 'secretkey',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: {maxAge: 24 * 60 * 60 * 1000} //one day
 }));
 app.use(flash());
 // the configuration applied here will be available in the other file.(passport)
 //app.use(passport.initialize());
 //app.use(passport.session()); // should be after app.use(sesseion(...))
 app.use(express.static(path.join(__dirname, 'public')));
+
+/*  maybe will need to use
+app.use(function(req, res, next){
+  res.locals.session = req.session;
+});
+*/
 
 app.use('/user', userRouter);
 app.use('/', indexRouter);

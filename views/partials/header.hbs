@@ -17,15 +17,19 @@
     <ul class="navbar-nav">
 
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> 購物車</a>
+        <a class="nav-link" href="/shoppingcart/"><i class="fas fa-shopping-cart"></i> 購物車</a>
       </li>
 
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="/user/profile" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-user-circle"></i> 會員
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="/user/profile">帳戶</a>
+          {{#if user}}
+          {{else}}
+          <a class="dropdown-item" href="/user/signup">註冊</a>
+          {{/if}}
           <a class="dropdown-item" href="
             {{#if user}}
               /user/signout
@@ -43,7 +47,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-ticket-alt"></i> 我的票券</a>
+        <a class="nav-link" href="/user/ticket"><i class="fas fa-ticket-alt"></i> 我的票券</a>
       </li>
 
     </ul>

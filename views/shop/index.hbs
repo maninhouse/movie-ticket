@@ -1,36 +1,34 @@
     
-    {{#each movies}}
+{{#each movies}}
 
-<div class="card-container mx-auto">
+    <div class="card-container mx-auto">
 
-            <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3" style="max-width: 540px;">
             <div class="row no-gutters">
 
-               
+                
                 <div class="col-md-4 align-self-center">
-                <img src='{{this.imagePath}}' class="img-fluid" alt="...">
+                    <img src='{{this.imagePath}}' class="img-fluid" alt="...">
                 </div>
 
                 <div class="col-md-8">
-                <div class="card-body">
-                    <small class="text-muted">{{this.movieNum}}</small>
-                    <h5 class="card-title">{{this.movieName}}</h5>
-                    <p class="card-text">上映日期：{{this.releaseDate}}</p>
-                    <p class="card-text">電影簡介：{{this.movieSynopsis}}</p>
-                    <p class="card-text">片長：{{this.movieLength}}分鐘</p>
-                    <form action="/shop/detail" method="GET">
-                    <button type="submit" class="btn btn-secondary">詳細說明</button>
-                    </form>
-                    <form action="/shop/buy" method="GET">
-                    <button type="submit" class="btn btn-secondary">訂購</button>
-                    </form>
+                    <div class="card-body">
+                    <!--<small class="text-muted">{{this.movieNum}}</small>-->
+                        <h5 class="card-title">{{this.movieName}}</h5>
+                        <p class="card-text">上映日期：{{this.releaseDate}}</p>
+                        <p class="card-text">電影簡介：{{this.movieSynopsis}}</p>
+                        <p class="card-text">片長：{{this.movieLength}}分鐘</p>
+                        
+                        <a href="/shop/detail/{{ this._id }}" class="btn btn-secondary">詳細說明</a>
+                        <a href="/addToCart/{{ this._id }}" class="btn btn-secondary" role="button">訂購</a>
+                        
+                    </div>
                 </div>
-                </div>
-               
+                
 
             </div>
-            </div>     
+        </div>     
 
-</div>
+    </div>
  
-    {{/each}}
+{{/each}}

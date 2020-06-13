@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var Order = require('../models/order');
+var Cart = require('../models/cart');
 var mongoose = require('mongoose');
 var csrf = require('csurf');
 var crypto = require('crypto');
+var QRCode = require('qrcode');
 
 /*prevent from csrf
 csrf in wiki:https://zh.wikipedia.org/zh-tw/%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0*/
@@ -85,6 +88,7 @@ router.get('/signup', function(req, res, next){
         salt: salt,
         referralCode: myReferralCode,
         invitedFriend: 0
+        //orderId: []
       });
   
       console.log(newUser);
@@ -95,7 +99,7 @@ router.get('/signup', function(req, res, next){
           
           console.error(err);
           req.flash('error', '帳戶建立失敗!');
-          res.redirect('/user/signup'); //not test yet
+          res.redirect('/error'); //not test yet
           
           //mongoose.disconnect();
           
@@ -103,7 +107,7 @@ router.get('/signup', function(req, res, next){
         
         console.log('saved!!');
         req.flash('success', '註冊成功!');
-        res.redirect('/user/profile');
+        res.redirect('/');
         //mongoose.disconnect();
         
           
@@ -150,6 +154,8 @@ router.get('/signup', function(req, res, next){
       }
       else{
         console.log('帳號或密碼錯誤');
+        req.flash('error', '帳號或密碼錯誤');
+        res.redirect('/user/error');
       }
   
     });
@@ -168,6 +174,69 @@ router.get('/signup', function(req, res, next){
     res.render('user/profile',{user: req.session.user,
                                success: req.flash('success').toString()});
                                //,error: req.flash('err').toString()});
+  });
+
+  
+  router.get('/ticket', isLoggedIn);
+  router.get('/ticket', function(req, res, next){
+      
+      var orders = Order.find({'user': req.session.user}, function(err, tickets){
+        if(err) console.error(err);
+        ticketList = [];
+        for(var i = 0; i < tickets.length; i++){
+            var ticket = tickets[i];
+            ticketList.push(ticket.toObject());
+        }
+        res.render('user/ticket', { title: '我的票券', tickets: ticketList});
+      });
+
+  });
+
+  router.get('/ticketInfo/:id', function(req, res, next){
+    var orderId = req.params.id;
+    var order = Order.findById(orderId, function(err, ticket){
+        if(err) {
+            req.flash('error', err.message);
+            res.redirect('/error');
+        }
+        var ticketObject = ticket.toObject();
+        var items = new Cart(ticketObject.cart);
+        res.render('user/ticketInfo', {ticket: ticketObject, items: items.generateArray()});
+    });
+    
+  });
+
+  router.get('/ticketCode/:id', function(req, res, next){
+    var orderId = req.params.id;
+    var order = Order.findById(orderId, function(err, ticket){
+        if(err) {
+            req.flash('error', err.message);
+            res.redirect('/error');
+        }
+        //var ticketObject = ticket.toObject();
+        var opts = {
+            errorCorrectionLevel: 'H',
+            type: 'image/jpeg',
+            quality: 0.3,
+            margin: 1,
+            color: {
+              dark:"#000000",
+              light:"#FFFFFF"
+            }
+          }
+
+        QRCode.toDataURL(orderId.toString(), opts, function(err, url){
+            if(err) {
+                req.flash('error', err.message);
+            }
+            //console.log('URL is here:');
+            //console.log(url);
+            res.render('user/ticketCode', {url: url});
+        });
+        
+        
+    });
+    
   });
   
   module.exports = router;

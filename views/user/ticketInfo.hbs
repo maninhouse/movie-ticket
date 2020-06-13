@@ -1,0 +1,51 @@
+    <div class="card-container mx-auto">
+
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+
+                <div class="col-md-12">
+                    <div class="card-body">
+                    
+                        <h5 class="card-title">票券代碼：{{ticket._id}}</h5>
+
+                        {{#each items}}
+                        <br>
+
+                        <li class="list-group-item">
+                            <div class="row justify-content-around">
+                            
+                            <p class="card-text">{{ this.item.movieName }}</p>
+                            <div class="row">
+                                票數x <span class="label">{{ this.qty }}</span>
+                            </div>
+  
+                            </div>
+                        </li>
+
+                        {{/each}}
+                        
+                        <br>
+
+                        <div class="row justify-content-between">
+                            
+                            <div></div>
+
+                            
+                            <a href="/user/ticketCode/{{ ticket._id }}" class="btn btn-secondary" role="button">兌換</a>
+
+                            <div></div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+                        
