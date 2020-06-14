@@ -50,6 +50,30 @@ router.get('/shop/detail/:id', function(req, res, next){
   
 });
 
+router.post('/shop/search', function(req, res, next){
+  var searchedMovie = req.body.search;
+  //console.log('searchMovie:');
+  //console.log(searchedMovie);
+  Movie.findOne({'movieName': searchedMovie}, function(err, movie){
+    var movieList = [];
+
+    
+    
+    if(movie){
+      //console.log(movie.movieName);
+      var movieObject = movie.toObject();
+      movieList.push(movieObject);//.toObject());  
+      res.render('shop/index', { title: '草莓影城訂票系統', movies: movieList,
+                               user: req.session.user
+      });
+    }
+    else{
+      res.redirect('/');
+    }
+    
+  });
+});
+
 router.get('/addTOCart/:id', function (req, res, next) {
   var movieId = req.params.id;
   var cart = new Cart(req.session.cart ? req.session.cart : {});
