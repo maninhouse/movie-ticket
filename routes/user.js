@@ -205,7 +205,21 @@ router.get('/signup', function(req, res, next){
     });
     
   });
-
+/*
+  router.get('/cancel/:id', function(req, res, next){
+    var orderId = req.params.id;
+    var order = Order.findById(orderId, function(err, ticket){
+        if(err) {
+            req.flash('error', err.message);
+            res.redirect('/error');
+        }
+        var ticketObject = ticket.toObject();
+        var items = new Cart(ticketObject.cart);
+        res.render('user/ticketInfo', {ticket: ticketObject, items: items.generateArray()});
+    });
+    
+  });
+*/
   router.get('/ticketCode/:id', function(req, res, next){
     var orderId = req.params.id;
     var order = Order.findById(orderId, function(err, ticket){
